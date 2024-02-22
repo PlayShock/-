@@ -1,0 +1,56 @@
+#АЛФАВИТ_СИМВОЛОВ_И_ЦИФРЫ==СЛОВА
+alp = []
+for i in range(32, 48):
+    alp.append(chr(i))
+for i in range(58, 128):
+    alp.append(chr(i))
+                    #print(alp)
+alpp = ','.join(alp)
+                    #print(alpp)
+book = {1: 'один', 2: 'два', 3: 'три', 4: 'четыре', 5: 'опять', 6: 'шесть', 7: 'семь', 8: 'восемь', 9: 'девять', 0: 'нуль'}
+
+
+#СОЗДАНИЕ_СПИСКА
+s = []
+with open('тест для аисд 11.txt') as f:
+    for line in f:
+        for  dell in alpp:
+            line = line.replace(dell, ' ')
+        s_num = map(int, line.split())
+        s.extend(s_num)
+#print(s)
+
+
+#СЧЁТ_ЦИФР
+def schet_digits(n):
+    k = 0
+    while abs(n) > 0:
+        n //= 10
+        k += 1
+        if n == 0:
+            break
+    return k
+
+#РАЗВОРОТ_ЧИСЛА
+def reverse(n):
+    x = 0
+    while n > 0:
+        x = (x*10)+(n%10)
+        n //= 10
+    return x
+#print(reverse(123))
+
+#ОСНОВНАЯ_ПРОГРАММА
+k = int(input('k = '))
+for i in range(len(s)):
+    if s[i] > k and s[i] % 2 != 0 and schet_digits(s[i]) % 2 == 0:
+        print(s[i])
+        a = s[i]
+        #ЦИФРЫ==БУКВЫ
+        x = reverse(a)
+        while x > 0:
+            #print(x)
+            print(book[x % 10])
+            x //= 10
+
+exit()
